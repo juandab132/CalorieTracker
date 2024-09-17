@@ -8,7 +8,7 @@ interface Food {
 }
 
 interface Meal {
-  name: string;    // Nombre de la comida (desayuno, almuerzo, etc....)
+  name: string;    // Nombre de la comida (desayuno, almuerzo, etc.)
   foods: Food[];   // Lista de alimentos en esa comida
 }
 
@@ -32,10 +32,11 @@ const HomePage = () => {
 
   // Función para añadir un alimento a una comida específica
   const addFoodToMeal = (mealName: string) => {
-    if (newFoodName.trim() && newFoodCalories > 0) {  // Verifica que el nombre y calorías sean válidos
+    const calories = Number(newFoodCalories); // Asegúrate de que sea un número
+    if (newFoodName.trim() && calories > 0) {  // Verifica que el nombre y calorías sean válidos
       const updatedMeals = meals.map(meal =>
         meal.name === mealName
-          ? { ...meal, foods: [...meal.foods, { name: newFoodName, calories: Number(newFoodCalories) }] }
+          ? { ...meal, foods: [...meal.foods, { name: newFoodName, calories }] }
           : meal
       );
       setMeals(updatedMeals);  // Actualiza las comidas con el nuevo alimento
